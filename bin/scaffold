@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+dir="$1/$2"
+mkdir $dir
+mkdir "$dir/_tests"
+mkdir "$dir/_stories"
+
+touch "$dir/$2.js"
+touch "$dir/_tests/$2.test.js"
+touch "$dir/_stories/$2.story.js"
+
+export_export="export"
+export_from="from './$2';"
+function export_statement() {
+  # asterisk is stupid in bash
+  echo $export_export \* $export_from
+}
+
+export_statement >> 'src/components/index.js'
+export_statement > "src/components/$2/index.js"
+
+echo "Created $dir/$2.js,"
+echo -e "\t$dir/index.js,"
+echo -e "\t$dir/_tests/$2.test.js,"
+echo -e "\t$dir/_stories/$2.story.js,"
+echo -e "\tand updated src/components/index.js"

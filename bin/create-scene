@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bin/scaffold '/src/scene' $1

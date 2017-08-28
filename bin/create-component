@@ -1,27 +1,3 @@
 #!/bin/bash
-set -e
 
-component_dir="src/components/$1"
-mkdir $component_dir
-mkdir "$component_dir/_tests"
-mkdir "$component_dir/_stories"
-
-touch "$component_dir/$1.js"
-touch "$component_dir/_tests/$1.test.js"
-touch "$component_dir/_stories/$1.story.js"
-
-export_export="export"
-export_from="from './$1';"
-function export_statement() {
-  # asterisk is stupid in bash
-  echo $export_export \* $export_from
-}
-
-export_statement >> 'src/components/index.js'
-export_statement > "src/components/$1/index.js"
-
-echo "Created $component_dir/$1.js,"
-echo -e "\t$component_dir/index.js,"
-echo -e "\t$component_dir/_tests/$1.test.js,"
-echo -e "\t$component_dir/_stories/$1.story.js,"
-echo -e "\tand updated src/components/index.js"
+bin/scaffold '/src/component' $1
