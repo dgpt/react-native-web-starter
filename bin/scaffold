@@ -17,8 +17,8 @@ function export_statement() {
   echo $export_export \* $export_from
 }
 
-export_statement >> 'src/components/index.js'
-export_statement > "src/components/$2/index.js"
+export_statement >> "$1/index.js"
+export_statement > "$dir/index.js"
 
 echo "Created $dir/$2.js,"
 echo -e "\t$dir/index.js,"
